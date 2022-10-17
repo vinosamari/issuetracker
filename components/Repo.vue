@@ -18,14 +18,27 @@
         >
       </div>
     </div>
-    <button>Details</button>
+    <nuxt-link @click="repoDetails(repo)" :to="`/repos/?id=${repo.id}`"
+      >Details</nuxt-link
+    >
   </section>
 </template>
 
 <script>
 export default {
-  mounted() {
-    // this.$store.dispatch("getLocalStoreRecents");
+  data() {
+    return {
+      repoDeets: null,
+    };
+  },
+  methods: {
+    repoDetails(repo) {
+      this.repoDeets = repo;
+      for (let property in this.repoDeets) {
+        console.log(property);
+      }
+      // console.log(`this is the repo ${this.repoDeets}`);
+    },
   },
   props: ["repo"],
 };
@@ -53,7 +66,7 @@ h1 {
 .tags div {
   @apply bg-gray-100 rounded-xl px-3 py-1 mr-2 shadow  flex font-bold;
 }
-button {
-  @apply shadow-lg rounded-sm text-xs font-medium capitalize tracking-wider px-4 py-2 my-3 hover:bg-white hover:shadow-xl transition-all duration-300 ease-out hover:text-black justify-self-end hover:scale-105 transform bg-black text-white w-1/2 mx-auto;
+a {
+  @apply shadow-lg rounded-sm text-xs font-medium capitalize tracking-wider px-4 py-2 my-3 hover:bg-white hover:shadow-xl transition-all duration-300 ease-out hover:text-black justify-self-end hover:scale-105 transform bg-black text-white  mx-auto;
 }
 </style>

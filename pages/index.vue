@@ -2,6 +2,7 @@
   <main>
     <h1>Github Issues Tracker</h1>
     <Search />
+    <!-- RECENT ITEMS -->
     <div class="recentsDiv" v-show="this.$store.state.recents.length > 1">
       <h2>Recent Searches</h2>
       <ul>
@@ -12,6 +13,7 @@
         </div>
       </ul>
     </div>
+    <!-- REPOS -->
     <div class="resultsDiv" v-show="this.$store.state.userRepos.length > 1">
       <h2 class="text-center tracking-tight font-medium capitalize text-xl">
         Showing all public repos with open issues for
