@@ -13,12 +13,10 @@
       </div>
       <div class="issues">
         <span>❗</span>
-        <span
-          >{{ repo.open_issues != 0 ? repo.open_issues_count : 0 }} issues</span
-        >
+        <span>{{ repo.open_issues != 0 ? repo.open_issues : 0 }} issues</span>
       </div>
     </div>
-    <nuxt-link @click="repoDetails(repo)" :to="`/repos/?id=${repo.id}`"
+    <nuxt-link @click="repoDetails(repo)" :to="`/repos/?name=${repo.name}`"
       >Details</nuxt-link
     >
   </section>
@@ -32,13 +30,11 @@ export default {
     };
   },
   methods: {
-    repoDetails(repo) {
-      this.repoDeets = repo;
-      for (let property in this.repoDeets) {
-        console.log(property);
-      }
-      // console.log(`this is the repo ${this.repoDeets}`);
-    },
+    // repoDetails(repo) {
+    //   this.repoDeets = repo;
+    //   for (let property in this.repoDeets) {
+    //   }
+    // },
   },
   props: ["repo"],
 };
@@ -46,7 +42,7 @@ export default {
 
 <style scoped>
 section {
-  @apply shadow-md rounded-sm p-3 font-mono flex flex-col my-2 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer transform hover:shadow-xl w-3/4 mx-auto;
+  @apply shadow-md rounded-sm p-3 font-mono flex flex-col my-2 hover:scale-105 transition-all duration-300 ease-in-out transform hover:shadow-xl w-3/4 mx-auto;
 }
 h1 {
   @apply font-bold tracking-tight text-xl mb-3;

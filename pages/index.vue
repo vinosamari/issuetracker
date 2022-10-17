@@ -15,7 +15,9 @@
     </div>
     <!-- REPOS -->
     <div class="resultsDiv" v-show="this.$store.state.userRepos.length > 1">
-      <h2 class="text-center tracking-tight font-medium capitalize text-xl">
+      <h2
+        class="text-center tracking-tight font-medium capitalize text-xl shadow-inner w-1/2 mx-auto py-2"
+      >
         Showing all public repos with open issues for
         {{ this.$store.state.currentUsername }}
       </h2>
@@ -43,12 +45,9 @@ export default {
   },
   methods: {
     searchRecent(item) {
-      console.log(item);
       this.$store.dispatch("toggleLoading", true);
       this.$store.dispatch("setUsername", item);
-      // this.$store.dispatch("addNewRecent", this.username);
       this.$store.dispatch("fetchUserDetails", item);
-      // this.$store.dispatch("getLocalStoreRecents");
 
       this.username = "";
     },
@@ -65,6 +64,9 @@ h1 {
 }
 .recentsDiv {
   @apply text-center font-mono font-medium text-xs tracking-tight mb-3;
+}
+.recentsDiv h2 {
+  @apply mb-1;
 }
 ul {
   @apply flex items-center text-xs tracking-tighter font-medium font-mono justify-evenly;

@@ -3,6 +3,7 @@ export const state = () => ({
   currentUsername: "",
   userRepos: [],
   recents: [],
+  repoIssues: [],
 });
 export const getters = {
   // getStateRecent3(state) {
@@ -17,6 +18,9 @@ export const mutations = {
 
   SAVE_REPO_DETAILS: (state, repos) => {
     state.userRepos = repos;
+  },
+  SAVE_REPO_ISSUES: (state, issues) => {
+    state.repoIssues = issues;
   },
   SET_USERNAME: (state, username) => {
     state.currentUsername = username;
@@ -59,6 +63,20 @@ export const actions = {
     }
   },
 
+  async fetchRepoIssues(ctx, repo) {
+    try {
+      let url = `https://api.github.com/repos/${$nuxt.$store.state.currentUsername}/${repo}/issues`;
+      let response = await $nuxt.$axios.get(url);
+      ctx.commit("SAVE_REPO_ISSUES", response.data);
+    } catch (error) {
+      $nuxt.$toast.error(`[ERROR::] ${error}`, {
+        timeout: 2500,
+        position: "top-center",
+      });
+      this.$router.replace({ path: "/" });
+    }
+  },
+
   setUsername(ctx, username) {
     ctx.commit("SET_USERNAME", username);
   },
@@ -74,8 +92,6 @@ export const actions = {
     await this.$localForage.setItem("recents", recents);
   },
   async getLocalStoreRecents(ctx) {
-    console.log("check");
-
     let recents = await this.$localForage.getItem("recents");
     let recentSet = Array.from(new Set(recents));
     ctx.commit("SET_STATE_RECENTS", recentSet.reverse());
