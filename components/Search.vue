@@ -9,10 +9,15 @@
         v-model="username"
         autofocus
       />
-      <button type="submit" :disabled="username == ''">
-        <span v-show="!this.$store.state.loading">Search User</span>
-
-        <div class="spinner" v-show="this.$store.state.loading"></div>
+      <button
+        type="submit"
+        :disabled="username == ''"
+        v-show="!this.$store.state.loading"
+      >
+        Search User
+      </button>
+      <button v-show="this.$store.state.loading" class="loadingBtn">
+        <div class="dots"></div>
       </button>
     </form>
   </section>
@@ -53,26 +58,60 @@ input {
 button {
   @apply shadow-lg rounded-sm text-sm font-bold uppercase tracking-wider px-4 py-2 my-3 hover:bg-white bg-black transition-all duration-300 ease-out hover:text-black text-white hover:shadow-xl;
 }
-button:disabled {
-  @apply text-gray-400 shadow-inner cursor-not-allowed  font-thin bg-gray-100;
+.loadingBtn {
+  @apply bg-white px-12 py-4 my-3 shadow-md;
 }
-.spinner {
-  border-radius: 50%;
-  background: radial-gradient(
-        farthest-side,
-        rgba(230, 230, 237, 0.98) 94%,
-        #0000
-      )
-      top/9px 9px no-repeat,
-    conic-gradient(#0000 30%, rgba(231, 231, 239, 0.98));
-  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
-  animation: spinner-c7wet2 1s infinite linear;
-  @apply bg-white h-10 w-10 rounded-full bg-black;
+button:disabled {
+  @apply text-gray-400 shadow-inner cursor-not-allowed  font-thin bg-gray-100  px-4 py-2;
 }
 
-@keyframes spinner-c7wet2 {
+.dots {
+  position: relative;
+  animation: dots-08q38pmd 1s infinite steps(2);
+  @apply h-2 w-2;
+}
+
+.dots::before,
+.dots::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #070708;
+}
+
+.dots::before {
+  box-shadow: 26.9px 0 #070708;
+  transform: translateX(-26.9px);
+  animation: dots-9frz8wmd 0.5s infinite linear alternate;
+}
+
+.dots::after {
+  transform: translateX(13.4px) rotate(0deg) translateX(13.4px);
+  animation: dots-2fnw0smd 0.5s infinite linear alternate;
+}
+
+@keyframes dots-08q38pmd {
+  0%,
+  49.9% {
+    transform: scale(1);
+  }
+
+  50%,
   100% {
-    transform: rotate(1turn);
+    transform: scale(-1);
+  }
+}
+
+@keyframes dots-9frz8wmd {
+  100% {
+    box-shadow: 53.8px 0 #070708;
+  }
+}
+
+@keyframes dots-2fnw0smd {
+  100% {
+    transform: translateX(13.4px) rotate(-180deg) translateX(13.4px);
   }
 }
 </style>

@@ -3,7 +3,7 @@
     <h1>Github Issues Tracker</h1>
     <Search />
     <div class="resultsDiv" v-show="this.$store.state.userRepos.length > 1">
-      <h2 class="text-center tracking-tight font-medium">
+      <h2 class="text-center tracking-tight font-medium capitalize">
         Showing all public repos with open issues for
         {{ this.$store.state.currentUsername }}
       </h2>
