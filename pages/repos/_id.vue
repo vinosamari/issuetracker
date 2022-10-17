@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>Showing details for {{ $route.query.id }}</div>
 </template>
 
 <script>

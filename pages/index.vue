@@ -6,7 +6,7 @@
       <h2>Recent Searches</h2>
       <ul>
         <div v-for="(item, index) in this.$store.state.recents" :key="index">
-          <li v-if="index < 5">
+          <li v-if="index < 5" @click="searchRecent(item)">
             {{ item }}
           </li>
         </div>
@@ -39,9 +39,16 @@ export default {
       stateRecents: this.$store.state.recents,
     };
   },
-  watch: {
-    stateRecents() {
-      console.log("There was a change!");
+  methods: {
+    searchRecent(item) {
+      console.log(item);
+      this.$store.dispatch("toggleLoading", true);
+      this.$store.dispatch("setUsername", item);
+      // this.$store.dispatch("addNewRecent", this.username);
+      this.$store.dispatch("fetchUserDetails", item);
+      // this.$store.dispatch("getLocalStoreRecents");
+
+      this.username = "";
     },
   },
 };
@@ -61,6 +68,6 @@ ul {
   @apply flex items-center text-xs tracking-tighter font-medium font-mono justify-evenly;
 }
 li {
-  @apply mx-3 bg-gray-700 text-gray-200 rounded-3xl p-1;
+  @apply mx-3 bg-gray-800 text-gray-100 rounded-3xl p-1 hover:bg-gray-700 cursor-pointer transition-all duration-200 ease-in-out;
 }
 </style>
