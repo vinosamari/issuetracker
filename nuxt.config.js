@@ -34,6 +34,14 @@ export default {
     "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
     "@nuxtjs/dotenv",
+    [
+      "@nuxtjs/localforage",
+      {
+        /* module options */
+        name: "githubissuestracker",
+        storeName: "githubissuestrackerDB",
+      },
+    ],
   ],
 
   googleFonts: {

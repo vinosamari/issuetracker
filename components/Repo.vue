@@ -18,12 +18,15 @@
         >
       </div>
     </div>
-    <button>Open issues</button>
+    <button>Details</button>
   </section>
 </template>
 
 <script>
 export default {
+  mounted() {
+    // this.$store.dispatch("getLocalStoreRecents");
+  },
   props: ["repo"],
 };
 </script>

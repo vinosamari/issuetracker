@@ -2,14 +2,13 @@ export const state = () => ({
   loading: false,
   currentUsername: "",
   userRepos: [],
-  fakeRepos: [
-    {
-      name: "",
-      language: "",
-    },
-  ],
+  recents: [],
 });
-export const getters = {};
+export const getters = {
+  // getStateRecent3(state) {
+  //   return state.recents.reverse().splice(0, 3);
+  // },
+};
 
 export const mutations = {
   TOGGLE_LOADING: (state, value) => {
@@ -22,12 +21,13 @@ export const mutations = {
   SET_USERNAME: (state, username) => {
     state.currentUsername = username;
   },
+  SET_STATE_RECENTS: (state, value) => {
+    state.recents = value;
+  },
 };
 
 export const actions = {
   async fetchUserDetails(ctx, username) {
-    console.log();
-
     try {
       let url = `https://api.github.com/users/${username}/repos`;
       let response = await $nuxt.$axios.get(url);
@@ -63,5 +63,17 @@ export const actions = {
 
   toggleLoading(ctx, value) {
     ctx.commit("TOGGLE_LOADING", value);
+  },
+
+  async addNewRecent(ctx, value) {
+    // GET RECENTS
+    let recents = await this.$localForage.getItem("recents");
+    recents.push(value);
+    await this.$localForage.setItem("recents", recents);
+  },
+  async getLocalStoreRecents(ctx) {
+    let recents = await this.$localForage.getItem("recents");
+    let recentSet = Array.from(new Set(recents));
+    ctx.commit("SET_STATE_RECENTS", recentSet.reverse().slice(0, 4));
   },
 };
