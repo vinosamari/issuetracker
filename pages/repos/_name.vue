@@ -9,7 +9,7 @@
       </h2>
       <h3>Opened by {{ issue.user.login }}</h3>
       <p class="line-clamp-3">{{ issue.body }}</p>
-      <a :href="`${issue.url}`" target="_blank">Open in Github</a>
+      <a :href="`${issue.html_url}`" target="_blank">Open in Github</a>
     </section>
   </main>
 </template>
