@@ -42,8 +42,10 @@ export const actions = {
             position: "top-center",
           }
         );
+        // ctx.dispatch("getLocalStoreRecents");
       }
       ctx.commit("SAVE_REPO_DETAILS", results);
+      ctx.dispatch("getLocalStoreRecents");
       ctx.commit("TOGGLE_LOADING", false);
     } catch (error) {
       $nuxt.$toast.error(
@@ -72,8 +74,10 @@ export const actions = {
     await this.$localForage.setItem("recents", recents);
   },
   async getLocalStoreRecents(ctx) {
+    console.log("check");
+
     let recents = await this.$localForage.getItem("recents");
     let recentSet = Array.from(new Set(recents));
-    ctx.commit("SET_STATE_RECENTS", recentSet.reverse().slice(0, 4));
+    ctx.commit("SET_STATE_RECENTS", recentSet.reverse());
   },
 };

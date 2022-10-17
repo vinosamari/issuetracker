@@ -5,13 +5,15 @@
     <div class="recentsDiv" v-show="this.$store.state.recents.length > 1">
       <h2>Recent Searches</h2>
       <ul>
-        <li v-for="(item, index) in this.$store.state.recents" :key="index">
-          {{ item }}
-        </li>
+        <div v-for="(item, index) in this.$store.state.recents" :key="index">
+          <li v-if="index < 5">
+            {{ item }}
+          </li>
+        </div>
       </ul>
     </div>
     <div class="resultsDiv" v-show="this.$store.state.userRepos.length > 1">
-      <h2 class="text-center tracking-tight font-medium capitalize">
+      <h2 class="text-center tracking-tight font-medium capitalize text-xl">
         Showing all public repos with open issues for
         {{ this.$store.state.currentUsername }}
       </h2>
@@ -53,7 +55,7 @@ h1 {
   @apply text-center text-3xl font-bold tracking-widest;
 }
 .recentsDiv {
-  @apply text-center font-mono font-medium text-xs tracking-tight;
+  @apply text-center font-mono font-medium text-xs tracking-tight mb-3;
 }
 ul {
   @apply flex items-center text-xs tracking-tighter font-medium font-mono justify-evenly;

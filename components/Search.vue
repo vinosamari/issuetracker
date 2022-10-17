@@ -35,9 +35,9 @@ export default {
     searchUser() {
       this.$store.dispatch("toggleLoading", true);
       this.$store.dispatch("setUsername", this.username);
-      this.$store.dispatch("fetchUserDetails", this.username);
       this.$store.dispatch("addNewRecent", this.username);
-      this.$store.dispatch("getLocalStoreRecents");
+      this.$store.dispatch("fetchUserDetails", this.username);
+      // this.$store.dispatch("getLocalStoreRecents");
 
       this.username = "";
     },
