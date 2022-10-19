@@ -31,11 +31,13 @@
 </template>
 
 <script>
+
 import Search from "~/components/Search.vue";
 export default {
   name: "IndexPage",
   mounted() {
     this.$store.dispatch("getLocalStoreRecents");
+    console.log(document.body.scrollTop);
   },
   components: { Search },
   data() {
@@ -51,6 +53,7 @@ export default {
 
       this.username = "";
     },
+    scrollFunction() {},
   },
 };
 </script>

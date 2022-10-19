@@ -42,7 +42,7 @@ export default {
 
 <style scoped>
 section {
-  @apply shadow-md rounded-sm p-3 font-mono flex flex-col my-2 hover:scale-105 transition-all duration-300 ease-in-out transform hover:shadow-xl w-3/4 mx-auto;
+  @apply shadow-inner rounded-sm p-3 font-mono flex flex-col my-2 hover:scale-105 transition-all duration-500 ease-in-out transform hover:shadow-xl w-3/4 mx-auto;
 }
 h1 {
   @apply font-bold tracking-tight text-xl mb-3;
